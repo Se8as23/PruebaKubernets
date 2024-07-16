@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword  # Aquí estableces la contraseña de root
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin # Aquí estableces la contraseña del usuario admin
+    ports:
+      - "3307:3306"
+
+  app:
+    image: se8as23/prueba_kubernetes
+    container_name: spring-boot-container
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
